@@ -1,6 +1,6 @@
 chrome.contextMenus.create({
-  id: 'react-boilerplate-extension',
-  title: 'React Boilerplate context menu',
+  id: 'web-extension-chatgpt',
+  title: 'Ask ChatGPT',
   contexts: ['selection'],
 });
 
