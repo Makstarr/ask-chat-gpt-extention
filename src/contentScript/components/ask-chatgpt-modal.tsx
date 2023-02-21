@@ -111,6 +111,10 @@ const inputStyles = css`
   font-weight: normal;
   font-size: 16px;
   row-gap: 10px;
+  border-radius: 3px;
+  background-color: ${({theme}) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.border};
+
 `;
 
 const StyledInput = styled.input`
