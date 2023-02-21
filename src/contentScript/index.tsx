@@ -1,5 +1,9 @@
 import { createRoot } from 'react-dom/client';
 
+import { ThemeProvider } from 'styled-components';
+
+import { theme } from 'src/theme/styled-components.theme';
+
 import ContentScript from './contentScript';
 
 function init() {
@@ -8,7 +12,11 @@ function init() {
   document.body.appendChild(appContainer);
 
   const root = createRoot(appContainer);
-  root.render(<ContentScript />);
+  root.render(
+    <ThemeProvider theme={theme}>
+      <ContentScript />
+    </ThemeProvider>
+  );
 }
 
 init();
