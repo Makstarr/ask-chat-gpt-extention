@@ -1,0 +1,39 @@
+{
+  "root": true,
+  "env": {
+    "webextensions": true,
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "ignorePatterns": [
+    "webpack.common.js",
+    "webpack.prod.js",
+    "webpack.dev.js",
+    "*.css",
+    "*.svg"
+  ],
+  "settings": {
+    "node": {
+      "paths": [
+        "src"
+      ],
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ]
+    }
+  },
+  "rules": {
+    "quotes": [
+      "error",
+      "single"
+    ]
+  }
+}
+
