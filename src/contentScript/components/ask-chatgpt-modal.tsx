@@ -68,7 +68,7 @@ const StyledModalContainer = styled.div`
   z-index: 9999;
 `;
 
-const StyledModal = styled.div`
+export const StyledModal = styled.div`
   color: ${({ theme }) => theme.colors.text};
   background-color: ${({ theme }) => theme.colors.primary};
   border: 2px solid ${({ theme }) => theme.colors.border};
@@ -112,9 +112,8 @@ const inputStyles = css`
   font-size: 16px;
   row-gap: 10px;
   border-radius: 3px;
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.border};
-
 `;
 
 const StyledInput = styled.input`
