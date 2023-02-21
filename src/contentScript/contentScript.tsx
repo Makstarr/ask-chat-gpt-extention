@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { AskChatGPTButton } from 'src/contentScript/components/ask-chatgpt-button';
-import { Modal } from 'src/contentScript/components/modal';
+import { AskChatGPTModal } from 'src/contentScript/components/ask-chatgpt-modal';
 
 export default () => {
   const [selectedText, setSelectedText] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(true);
 
   useEffect(() => {
     const handleMouseUp = (event: MouseEvent) => {
@@ -39,7 +39,7 @@ export default () => {
         />
       )}
       {isModalVisible && (
-        <Modal
+        <AskChatGPTModal
           selectedText={selectedText}
           onClose={() => {
             setIsModalVisible(false);

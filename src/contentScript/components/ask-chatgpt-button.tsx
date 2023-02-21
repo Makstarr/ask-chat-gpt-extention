@@ -2,12 +2,14 @@ import React from 'react';
 
 import styled from 'styled-components';
 
+import { Icon } from './icon';
+
 export const AskChatGPTButton = ({
   ...rest
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <StyledButton {...rest}>
-      <Icon src={chrome.runtime.getURL('icon.png')} />
+      <Icon />
       Ask ChatGPT
     </StyledButton>
   );
@@ -39,9 +41,4 @@ const StyledButton = styled.button`
   :hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
   }
-`;
-
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
 `;
