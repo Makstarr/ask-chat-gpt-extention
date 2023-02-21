@@ -1,29 +1,19 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+ChatGPT extension optimized to work in Chrome Browser
 
-### What is this repository for? ###
+### How to create a dist folder ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* nom run watch
+* npm run build
 
-### How do I get set up? ###
+### How to install in Chrome ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Open the Chrome Web Store
+* Find and select a dist folder
+* Click Add to Chrome
 
-### Contribution guidelines ###
+### How to use ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Select text on any page
+* Click the button or use context menu
