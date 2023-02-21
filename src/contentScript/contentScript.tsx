@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from 'src/contentScript/components/button';
+import { AskChatGPTButton } from 'src/contentScript/components/ask-chatgpt-button';
 import { Modal } from 'src/contentScript/components/modal';
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
 
   useEffect(() => {
     const handleMouseUp = (event: MouseEvent) => {
-      if ((event.target as Element).id !== 'my-button') {
+      if ((event.target as Element).id !== 'ask-chatgpt-button') {
         const text = window?.getSelection()?.toString() ?? '';
         setSelectedText(text);
       }
@@ -31,8 +31,8 @@ export default () => {
   return (
     <>
       {selectedText && (
-        <Button
-          id={'my-button'}
+        <AskChatGPTButton
+          id={'ask-chatgpt-button'}
           onClick={() => {
             setIsModalVisible(true);
           }}

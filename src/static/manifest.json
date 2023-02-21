@@ -20,6 +20,15 @@
     "48": "icon.png",
     "128": "icon.png"
   },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icon.png"
+      ],
+      "matches": ["<all_urls>"],
+      "extension_ids": []
+    }
+  ],
   "options_page": "options.html",
   "background": {
     "service_worker": "background.js"
