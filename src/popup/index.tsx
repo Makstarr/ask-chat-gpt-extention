@@ -16,6 +16,9 @@ import GlobalStyle from 'src/theme/global-styles';
 
   const root = createRoot(appContainer);
   const theme = await getUserTheme();
+
+  // TODO: Add login logic here
+
   root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />

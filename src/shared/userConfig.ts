@@ -1,3 +1,5 @@
+// TODO: Refactor the whole file
+//
 export enum Theme {
   Light = 'light',
   Dark = 'dark',

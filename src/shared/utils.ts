@@ -1,3 +1,4 @@
+// TODO: Refactor the whole file
 import { styledTheme } from 'src/theme/styled-components.theme';
 
 export function detectSystemColorScheme() {

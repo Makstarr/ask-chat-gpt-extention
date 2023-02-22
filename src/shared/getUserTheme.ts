@@ -1,3 +1,5 @@
+// TODO: Change name
+
 import { styledTheme } from 'src/theme/styled-components.theme';
 import { getUserConfig, Theme } from './userConfig';
 import { detectSystemColorScheme } from './utils';

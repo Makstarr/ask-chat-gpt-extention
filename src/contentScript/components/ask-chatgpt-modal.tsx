@@ -6,6 +6,11 @@ import ChatGPTQuery, { QueryStatus } from './ChatGPTQuery';
 import { getRandomQuestionExample } from './get-random-question-example';
 import { Icon } from './icon';
 
+
+// TODO: Change status logic
+// TODO: Answer render
+// TODO: Login render
+
 interface TProps {
   onClose: () => void;
   selectedText: string;

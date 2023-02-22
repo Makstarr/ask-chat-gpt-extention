@@ -1,3 +1,5 @@
+// TODO: Refactor the whole file
+//
 import { createParser, ParseEvent } from 'eventsource-parser';
 
 import { streamAsyncIterable } from './stream-async-iterable';

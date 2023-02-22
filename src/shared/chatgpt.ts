@@ -1,3 +1,5 @@
+// TODO: Refactor the whole file
+//
 // import ExpiryMap from 'expiry-map';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -42,9 +44,13 @@ const KEY_ACCESS_TOKEN = 'accessToken';
 // const cache = new ExpiryMap(10 * 1000);
 
 export async function getChatGPTAccessToken() {
+  // TODO: Try to restore cache token behaviour (crashes background.js)
+
   // if (cache.get(KEY_ACCESS_TOKEN)) {
   //   return cache.get(KEY_ACCESS_TOKEN);
   // }
+
+
   const currentToken = await chrome.storage.sync.get(KEY_ACCESS_TOKEN);
   // if (currentToken) {
   //   return currentToken;

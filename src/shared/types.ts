@@ -1,3 +1,6 @@
+
+// TODO: Refactor the whole file
+//
 export interface Answer {
     text: string
     messageId: string

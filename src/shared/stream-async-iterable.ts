@@ -1,3 +1,6 @@
+// TODO: Refactor the whole file
+//
+
 export async function* streamAsyncIterable(stream: ReadableStream) {
   const reader = stream.getReader()
   try {

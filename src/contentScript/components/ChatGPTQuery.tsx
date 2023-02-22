@@ -1,3 +1,6 @@
+// TODO: Refactor the whole file
+
+
 // import { GearIcon } from '@primer/octicons-react'
 // import { useEffect, useState } from 'preact/hooks'
 import { memo, useCallback, useEffect, useState } from 'react';
