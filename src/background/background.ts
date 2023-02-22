@@ -1,8 +1,7 @@
-import {
-  ChatGPTProvider,
-  getChatGPTAccessToken, // sendMessageFeedback,
+import { ChatGPTProvider, getChatGPTAccessToken // sendMessageFeedback,
 } from '../shared/chatgpt';
 import { Provider } from '../shared/types';
+
 
 chrome.contextMenus.create({
   id: 'web-extension-chatgpt-context-menu',
@@ -16,11 +15,11 @@ chrome.contextMenus.onClicked.addListener((info) => {
   });
 });
 
-async function generateAnswers(port: chrome.runtime.Port, question: string) {
-  const token = await getChatGPTAccessToken();
-  // console.log(token)
-  console.log(question);
-  console.log(port);
+async function generateAnswers(
+  port: chrome.runtime.Port,
+  token: string,
+  question: string
+) {
   const provider: Provider = new ChatGPTProvider(token);
 
   const controller = new AbortController();
@@ -48,9 +47,17 @@ chrome.runtime.onConnect.addListener((port) => {
   console.log('connect');
   port.onMessage.addListener(async (msg) => {
     console.debug('received msg', msg);
+
     try {
+      const token = await getChatGPTAccessToken();
+      console.log({ msg });
+      console.log(token);
+      if (msg.question) {
+        await generateAnswers(port, token, msg.question);
+      } else {
+        port.postMessage({ type: 'AUTHORIZED' });
+      }
       console.log(msg.question);
-      await generateAnswers(port, msg.question);
     } catch (err: any) {
       console.error(err);
       port.postMessage({ error: err.message });

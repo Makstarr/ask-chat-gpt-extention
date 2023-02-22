@@ -11,15 +11,15 @@ import { Answer } from 'src/shared/types';
 export type QueryStatus = 'success' | 'error' | undefined;
 
 interface Props {
-  question: string;
-  onStatusChange?: (status: QueryStatus) => void;
+  question?: string;
+  onStatusChange: (status: QueryStatus) => void;
 }
 
 function ChatGPTQuery(props: Props) {
   const [answer, setAnswer] = useState<Answer | null>(null);
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
-  const [done, setDone] = useState(false);
+
   const [status, setStatus] = useState<QueryStatus>();
 
   useEffect(() => {
@@ -30,15 +30,20 @@ function ChatGPTQuery(props: Props) {
       if (msg.text) {
         setAnswer(msg);
         setStatus('success');
+        props.onStatusChange('success');
       } else if (msg.error) {
         setError(msg.error);
         setStatus('error');
-      } else if (msg.event === 'DONE') {
-        setDone(true);
+        props.onStatusChange('error');
+      } else if (msg.type === 'AUTHORIZED') {
+        setStatus('success');
+        props.onStatusChange('success');
       }
     };
     port.onMessage.addListener(listener);
+
     port.postMessage({ question: props.question });
+
     return () => {
       port.onMessage.removeListener(listener);
       port.disconnect();
@@ -98,11 +103,14 @@ function ChatGPTQuery(props: Props) {
     );
   }
 
-  return (
-    <p className="text-[#b6b8ba] animate-pulse">
-      Waiting for ChatGPT response...
-    </p>
-  );
+  if (status !== 'success') {
+    return (
+      <p className="text-[#b6b8ba] animate-pulse">
+        Waiting for ChatGPT response...
+      </p>
+    );
+  }
+  return null;
 }
 
 export default memo(ChatGPTQuery);
