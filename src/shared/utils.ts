@@ -1,6 +1,6 @@
 import Browser from 'webextension-polyfill';
 
-import { styledTheme } from '../theme/styled-components.theme';
+import { styledTheme } from 'src/theme/styled-components.theme';
 
 export function detectSystemColorScheme() {
   if (

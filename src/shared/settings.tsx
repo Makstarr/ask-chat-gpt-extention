@@ -20,18 +20,18 @@ export function Settings() {
     <StyledSettings>
       <h1>Set theme</h1>
       <div>Reload the page to see changes</div>
-      {Object.entries(Theme).map(([k, v]) => (
-        <div key={k}>
+      {Object.entries(Theme).map(([key, value]) => (
+        <div key={key}>
           <input
             type="radio"
-            name={k}
-            value={v}
-            checked={theme === v}
+            name={key}
+            value={value}
+            checked={theme === value}
             onChange={(e) => {
               onThemeChange(e.target.value as Theme);
             }}
           />
-          <label>{v}</label>
+          <label>{value}</label>
         </div>
       ))}
     </StyledSettings>
