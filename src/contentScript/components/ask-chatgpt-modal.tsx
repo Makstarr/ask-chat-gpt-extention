@@ -112,8 +112,9 @@ const inputStyles = css`
   font-size: 16px;
   row-gap: 10px;
   border-radius: 3px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.inputsBackground};
   border: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 const StyledInput = styled.input`
@@ -130,7 +131,7 @@ const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.accent};
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 3px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.textContrast};
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
