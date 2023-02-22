@@ -1,5 +1,3 @@
-import Browser from 'webextension-polyfill';
-
 import { styledTheme } from 'src/theme/styled-components.theme';
 
 export function detectSystemColorScheme() {
@@ -13,5 +11,5 @@ export function detectSystemColorScheme() {
 }
 
 export function getExtensionVersion() {
-  return Browser.runtime.getManifest().version;
+  return chrome.runtime.getManifest().version;
 }

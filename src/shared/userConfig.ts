@@ -1,5 +1,3 @@
-import Browser from 'webextension-polyfill';
-
 export enum Theme {
   Light = 'light',
   Dark = 'dark',
@@ -25,7 +23,7 @@ const userConfigWithDefaultValue = {
 export type UserConfig = typeof userConfigWithDefaultValue;
 
 export async function getUserConfig(): Promise<UserConfig> {
-  const result = (await Browser.storage.local.get(
+  const result = (await chrome.storage.local.get(
     Object.keys(userConfigWithDefaultValue)
   )) as UserConfig;
 
@@ -34,9 +32,5 @@ export async function getUserConfig(): Promise<UserConfig> {
 
 export async function updateUserConfig(updates: Partial<UserConfig>) {
   console.debug('update configs', updates);
-  return Browser.storage.local.set(updates);
+  return chrome.storage.local.set(updates);
 }
-
-
-
-

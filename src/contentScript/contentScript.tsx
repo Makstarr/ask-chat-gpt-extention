@@ -5,7 +5,7 @@ import { AskChatGPTModal } from 'src/contentScript/components/ask-chatgpt-modal'
 
 export default () => {
   const [selectedText, setSelectedText] = useState('');
-  const [isModalVisible, setIsModalVisible] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   useEffect(() => {
     const handleMouseUp = (event: MouseEvent) => {
