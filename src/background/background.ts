@@ -1,5 +1,5 @@
 chrome.contextMenus.create({
-  id: 'web-extension-chatgpt',
+  id: 'web-extension-chatgpt-context-menu',
   title: 'Ask ChatGPT',
   contexts: ['selection'],
 });
