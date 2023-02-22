@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import { getUserTheme } from 'src/shared/getUserTheme';
-import { Settings } from 'src/shared/settings';
+import { UserSettings } from 'src/shared/userSettings';
 import GlobalStyle from 'src/theme/global-styles';
 
 (async () => {
@@ -19,7 +19,7 @@ import GlobalStyle from 'src/theme/global-styles';
   root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Settings />
+      <UserSettings />
     </ThemeProvider>
   );
 })();

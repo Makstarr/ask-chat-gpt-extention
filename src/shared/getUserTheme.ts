@@ -1,5 +1,5 @@
 import { styledTheme } from 'src/theme/styled-components.theme';
-import { getUserConfig, Theme } from './config';
+import { getUserConfig, Theme } from './userConfig';
 import { detectSystemColorScheme } from './utils';
 
 export const getUserTheme = async () => {

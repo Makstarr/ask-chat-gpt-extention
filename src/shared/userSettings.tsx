@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { getUserConfig, Theme, updateUserConfig } from './config';
+import { getUserConfig, Theme, updateUserConfig } from './userConfig';
 
-export function Settings() {
+export function UserSettings() {
   const [theme, setTheme] = useState<string>('');
 
   useEffect(() => {
