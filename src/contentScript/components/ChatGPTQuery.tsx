@@ -46,18 +46,18 @@ function ChatGPTQuery(props: Props) {
   }, [props.question, retry]);
 
   // retry error on focus
-  // useEffect(() => {
-  //   const onFocus = () => {
-  //     if (error && (error == 'UNAUTHORIZED' || error === 'CLOUDFLARE')) {
-  //       setError('');
-  //       setRetry((r) => r + 1);
-  //     }
-  //   };
-  //   window.addEventListener('focus', onFocus);
-  //   return () => {
-  //     window.removeEventListener('focus', onFocus);
-  //   };
-  // }, [error]);
+  useEffect(() => {
+    const onFocus = () => {
+      if (error && (error == 'UNAUTHORIZED' || error === 'CLOUDFLARE')) {
+        setError('');
+        setRetry((r) => r + 1);
+      }
+    };
+    window.addEventListener('focus', onFocus);
+    return () => {
+      window.removeEventListener('focus', onFocus);
+    };
+  }, [error]);
 
   if (answer) {
     return (

@@ -54,10 +54,13 @@ export async function getChatGPTAccessToken() {
   console.log('getChatGPTAccessToken');
   const resp = await fetch('https://chat.openai.com/api/auth/session');
   console.log(resp);
+
   if (resp.status === 403) {
     throw new Error('CLOUDFLARE');
   }
+
   const data = await resp.json().catch(() => ({}));
+
   if (!data.accessToken) {
     throw new Error('UNAUTHORIZED');
   }

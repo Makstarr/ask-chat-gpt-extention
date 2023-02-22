@@ -46,11 +46,11 @@ async function generateAnswers(port: chrome.runtime.Port, question: string) {
 
 chrome.runtime.onConnect.addListener((port) => {
   console.log('connect');
-  port.onMessage.addListener((msg) => {
+  port.onMessage.addListener(async (msg) => {
     console.debug('received msg', msg);
     try {
       console.log(msg.question);
-      generateAnswers(port, msg.question);
+      await generateAnswers(port, msg.question);
     } catch (err: any) {
       console.error(err);
       port.postMessage({ error: err.message });
