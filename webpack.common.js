@@ -47,7 +47,7 @@ module.exports = {
         },
       ],
     }),
-    getHtmlPlugins(['popup', 'options']),
+    ...getHtmlPlugins(['popup', 'options']),
   ],
   resolve: {
     alias: {
