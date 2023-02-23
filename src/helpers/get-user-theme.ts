@@ -1,7 +1,7 @@
 // TODO: Change name
-
 import { styledTheme } from 'src/theme/styled-components.theme';
-import { getUserConfig, Theme } from './userConfig';
+
+import { getUserConfig, Theme } from './user-config';
 import { detectSystemColorScheme } from './utils';
 
 export const getUserTheme = async () => {
@@ -10,6 +10,7 @@ export const getUserTheme = async () => {
   if (!userConfig.theme) {
     return detectSystemColorScheme();
   } else {
-    return styledTheme[userConfig.theme as Theme] || styledTheme.light;
+    // @ts-ignore
+    return styledTheme[userConfig.theme] ?? styledTheme.light;
   }
 };

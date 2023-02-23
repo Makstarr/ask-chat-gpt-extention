@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 
 import { ThemeProvider } from 'styled-components';
 
-import { getUserTheme } from 'src/helpers/getUserTheme';
+import { getUserTheme } from 'src/helpers/get-user-theme';
 import GlobalStyle from 'src/theme/global-styles';
 
 import { Popup } from './popup';
