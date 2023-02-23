@@ -37,7 +37,6 @@ export const LoginChatGpt = ({
       setIsLoading(false);
     };
     port.onMessage.addListener(authListener);
-    console.log(port);
     port.postMessage({ type: AUTH_MESSAGE_TYPE });
 
     return () => {

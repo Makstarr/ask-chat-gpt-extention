@@ -24,7 +24,6 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log(getRandomQuestionExample());
       setExampleQuestion(getRandomQuestionExample());
     }, 4000);
     return () => {
