@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import ChatGPTQuery from './chat-gpt-query';
-import { getRandomQuestionExample } from './get-random-question-example';
+import { getRandomQuestionExample } from '../helpers/get-random-question-example';
 import { Icon } from './icon';
 import { LoginChatGpt } from './login-chat-gpt';
 
