@@ -23,7 +23,7 @@ function ChatGptQuery(props: Props) {
 
   useEffect(() => {
     const port = chrome.runtime.connect();
-
+    setAnswer(null);
     const listener = (msg: any) => {
       setError('');
       if (msg.text) {
@@ -55,7 +55,7 @@ function ChatGptQuery(props: Props) {
         </p>
       ) : null}
 
-      {props.question && !answer && !error ? <Loader /> : null}
+      {props.question && !answer && !error ?<LoaderContainer> <Loader /></LoaderContainer> : null}
 
       {answer ? (
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
@@ -74,32 +74,34 @@ const StyledIcon = styled.div`
 `;
 
 const StyledAnswer = styled.div`
-  background-color: ${({theme}) => theme.colors.inputsBackground};
-  color: ${({theme}) => theme.colors.text};
+  background-color: ${({ theme }) => theme.colors.inputsBackground};
+  color: ${({ theme }) => theme.colors.text};
   margin-left: 35px;
   margin-top: 35px;
   padding: 10px;
   position: relative;
   border-radius: 10px;
+  text-align: left;
 
   ::before {
     content: '';
     height: 0;
     border-style: solid;
     border-width: 0 10px 30px 10px;
-    border-color: transparent transparent ${({theme}) =>
-            theme.colors.inputsBackground} transparent;
+    border-color: transparent transparent
+      ${({ theme }) => theme.colors.inputsBackground} transparent;
     transform: rotate(-45deg);
     position: absolute;
     top: -15px;
     left: -10px;
     width: 0;
   }
-}
-
-::before {
-
-}
 `;
 
 export default memo(ChatGptQuery);
+
+
+const LoaderContainer = styled.div`
+  text-align: center;
+  width: 100%;
+`

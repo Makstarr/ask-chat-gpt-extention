@@ -82,7 +82,6 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
             />
           </StyledLabel>
           {authorized && <StyledButton type="submit">Ask ChatGPT</StyledButton>}
-          {/*{<StyledButton type="submit">Ask ChatGPT</StyledButton>}*/}
         </form>
         {!authorized && (
           <StyledAuth>
