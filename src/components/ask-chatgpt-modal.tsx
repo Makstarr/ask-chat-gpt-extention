@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import styled, { css } from 'styled-components';
 
-import ChatGPTQuery from './chat-gpt-query';
 import { getRandomQuestionExample } from '../helpers/get-random-question-example';
+import ChatGPTQuery from './chat-gpt-query';
 import { Icon } from './icon';
 import { LoginChatGpt } from './login-chat-gpt';
 
@@ -50,11 +50,8 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
   };
 
   return (
-    <StyledModalContainer className="modal-background" onClick={onClose}>
-      <StyledModal
-        className="modal-content"
-        onClick={(event) => event.stopPropagation()}
-      >
+    <StyledModalContainer onMouseDown={onClose}>
+      <StyledModal onMouseDown={(event) => event.stopPropagation()}>
         <StyledHeader>
           What do you want to know? <Icon />
         </StyledHeader>
