@@ -63,6 +63,7 @@ export const LoginChatGpt = ({
           (() => {
             return (
               <span>
+                <br />
                 OpenAI requires passing a security check every once in a while.
                 If you can't log in please try again later.
               </span>
