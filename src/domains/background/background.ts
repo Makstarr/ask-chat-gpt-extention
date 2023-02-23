@@ -1,8 +1,5 @@
-import {
-  ChatGPTProvider,
-  getChatGPTAccessToken, // sendMessageFeedback,
-} from '../../helpers/chatgpt';
-import { Provider } from '../../helpers/types';
+import { ChatGPTProvider, getChatGPTAccessToken } from 'src/helpers/chatgpt';
+import { Provider } from 'src/helpers/types';
 
 chrome.contextMenus.create({
   id: 'web-extension-chatgpt-context-menu',
@@ -60,4 +57,10 @@ chrome.runtime.onConnect.addListener((port) => {
       port.postMessage({ type: msg.type, status: err.message });
     }
   });
+});
+
+chrome.runtime.onMessage.addListener(async (message) => {
+  if (message.type === 'OPEN_OPTIONS_PAGE') {
+    chrome.runtime.openOptionsPage();
+  }
 });

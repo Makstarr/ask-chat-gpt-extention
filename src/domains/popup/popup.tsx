@@ -13,5 +13,14 @@ export const Popup = () => {
     return <p>Successfully authorized, you can use the app </p>;
   }
 
-  return <LoginChatGpt onStatusChange={onAuthStatusChange} />;
+  const openOptionsPage = () => {
+    chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS_PAGE' });
+  };
+
+  return (
+    <div>
+      <button onClick={openOptionsPage}>Settings</button>
+      <LoginChatGpt onStatusChange={onAuthStatusChange} />
+    </div>
+  );
 };

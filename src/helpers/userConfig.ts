@@ -3,6 +3,7 @@
 export enum Theme {
   Light = 'light',
   Dark = 'dark',
+  System = 'system'
 }
 
 export enum Language {
@@ -18,7 +19,7 @@ export enum Language {
 }
 
 const userConfigWithDefaultValue = {
-  theme: '',
+  theme: 'system',
   language: Language.Auto,
 };
 
