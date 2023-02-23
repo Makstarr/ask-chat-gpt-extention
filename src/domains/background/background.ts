@@ -19,7 +19,8 @@ chrome.contextMenus.onClicked.addListener((info) => {
 async function generateAnswers(
   port: chrome.runtime.Port,
   token: string,
-  question: string
+  question: string,
+  type: string
 ) {
   const provider: Provider = new ChatGPTProvider(token);
 
@@ -34,11 +35,11 @@ async function generateAnswers(
     signal: controller.signal,
     onEvent(event) {
       if (event.type === 'done') {
-        port.postMessage({ event: 'DONE' });
+        port.postMessage({ type, event: 'DONE' });
         return;
       }
       if (event.type === 'answer') {
-        port.postMessage(event.data);
+        port.postMessage({ type, ...event.data });
       }
     },
   });
@@ -50,7 +51,7 @@ chrome.runtime.onConnect.addListener((port) => {
     try {
       const token = await getChatGPTAccessToken();
       if (msg.question) {
-        await generateAnswers(port, token, msg.question);
+        await generateAnswers(port, token, msg.question, msg.type);
       } else {
         port.postMessage({ type: msg.type, success: true });
       }

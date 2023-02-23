@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { Loader } from './loader';
+
 export const AUTH_MESSAGE_TYPE = 'AUTH';
 export const AUTH_MESSAGE_SUCCESS = 'AUTHORIZED';
 
@@ -45,11 +47,7 @@ export const LoginChatGpt = ({
   }, [retry]);
 
   if (isLoading) {
-    return (
-      <p className="text-[#b6b8ba] animate-pulse">
-        Waiting for ChatGPT response...
-      </p>
-    );
+    return <Loader />;
   }
 
   if (status && status === 'CLOUDFLARE') {
@@ -60,7 +58,6 @@ export const LoginChatGpt = ({
           chat.openai.com
         </a>{' '}
         status: 403
-        <br />
         <br />
         {retry > 0 &&
           (() => {
@@ -97,14 +94,14 @@ export const LoginChatGpt = ({
     );
   }
 
-  // if (status) {
-  //   return (
-  //     <p>
-  //       Failed to load response from ChatGPT:
-  //       <span className="break-all block">{status}</span>
-  //     </p>
-  //   );
-  // }
+  if (status) {
+    return (
+      <p>
+        Failed to load response from ChatGPT:
+        <span>{status}</span>
+      </p>
+    );
+  }
 
   return null;
 };

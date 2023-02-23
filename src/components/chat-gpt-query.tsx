@@ -1,9 +1,13 @@
-import { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 import rehypeHighlight from 'rehype-highlight';
+import styled from 'styled-components';
 
 import { Answer } from 'src/helpers/types';
+
+import { Icon } from './icon';
+import { Loader } from './loader';
 
 export type QueryStatus = 'success' | 'error' | undefined;
 
@@ -19,15 +23,13 @@ function ChatGptQuery(props: Props) {
 
   useEffect(() => {
     const port = chrome.runtime.connect();
+
     const listener = (msg: any) => {
-      if (msg.type !== REQUEST_MESSAGE_TYPE) {
-        return;
-      }
       setError('');
       if (msg.text) {
         setAnswer(msg);
-      } else if (msg.error) {
-        setError(msg.error);
+      } else if (msg.status) {
+        setError(msg.status);
       }
     };
 
@@ -40,34 +42,64 @@ function ChatGptQuery(props: Props) {
     };
   }, [props.question]);
 
-  if (error) {
-    return (
-      <p>
-        Failed to load response from ChatGPT:
-        <span className="break-all block">{error}</span>
-      </p>
-    );
-  }
+  return (
+    <StyledAnswer>
+      <StyledIcon>
+        <Icon />
+      </StyledIcon>
 
-  if (props.question && !answer) {
-    return (
-      <p className="text-[#b6b8ba] animate-pulse">
-        Waiting for ChatGPT response...
-      </p>
-    );
-  }
+      {props.question && error ? (
+        <p>
+          Failed to load response from ChatGPT:
+          <span className="break-all block">{error}</span>
+        </p>
+      ) : null}
 
-  if (answer) {
-    return (
-      <div>
+      {props.question && !answer && !error ? <Loader /> : null}
+
+      {answer ? (
         <ReactMarkdown rehypePlugins={[[rehypeHighlight, { detect: true }]]}>
           {answer.text}
         </ReactMarkdown>
-      </div>
-    );
-  }
-
-  return null;
+      ) : null}
+    </StyledAnswer>
+  );
 }
+
+const StyledIcon = styled.div`
+  position: absolute;
+  top: -31px;
+  left: -30px;
+  width: 20px;
+`;
+
+const StyledAnswer = styled.div`
+  background-color: ${({theme}) => theme.colors.inputsBackground};
+  color: ${({theme}) => theme.colors.text};
+  margin-left: 35px;
+  margin-top: 35px;
+  padding: 10px;
+  position: relative;
+  border-radius: 10px;
+
+  ::before {
+    content: '';
+    height: 0;
+    border-style: solid;
+    border-width: 0 10px 30px 10px;
+    border-color: transparent transparent ${({theme}) =>
+            theme.colors.inputsBackground} transparent;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: -15px;
+    left: -10px;
+    width: 20px;
+  }
+}
+
+::before {
+
+}
+`;
 
 export default memo(ChatGptQuery);

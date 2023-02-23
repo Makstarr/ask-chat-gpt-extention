@@ -7,5 +7,5 @@ const StyledIcon = styled.img`
 `;
 
 export const Icon = () => (
-  <StyledIcon src={chrome.runtime.getURL('icon.png')} />
+  <StyledIcon id='icon' src={chrome.runtime.getURL('icon.png')} />
 );

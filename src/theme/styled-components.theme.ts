@@ -10,6 +10,7 @@ export const styledTheme = {
       border: '#FFFFFF',
       inputsBackground: '#424242',
       pink: '#FF6090',
+      link: '#005fff',
     },
   },
   light: {
@@ -23,6 +24,7 @@ export const styledTheme = {
       border: '#212121',
       inputsBackground: '#fff',
       pink: '#FF78BA',
+      link: '#005fff',
     },
   },
 };

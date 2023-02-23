@@ -2,14 +2,10 @@ import React, { useState } from 'react';
 
 import styled, { css } from 'styled-components';
 
-import ChatGPTQuery, { QueryStatus } from './chat-gpt-query';
+import ChatGPTQuery from './chat-gpt-query';
 import { getRandomQuestionExample } from './get-random-question-example';
 import { Icon } from './icon';
-import { AUTH_MESSAGE_SUCCESS, LoginChatGpt } from './login-chat-gpt';
-
-// TODO: Change status logic
-// TODO: Answer render
-// TODO: Login render
+import { LoginChatGpt } from './login-chat-gpt';
 
 interface TProps {
   onClose: () => void;
@@ -22,9 +18,13 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
   const [questionError, setQuestionError] = useState('');
   const [requestString, setRequestString] = useState('');
   const [authorized, setAuthorized] = useState(false);
+  const exampleQuestion = getRandomQuestionExample();
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!authorized) {
+      return;
+    }
     setQuestionError('');
     if (!question) {
       setQuestionError('Please provide a question');
@@ -51,14 +51,14 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
             Question
             <StyledInput
               type="text"
-              placeholder={`Example: ${getRandomQuestionExample()}`}
+              placeholder={`Example: ${exampleQuestion}`}
               value={question}
               error={!!questionError}
               onChange={(e) => {
                 setQuestion(e.target.value);
               }}
             />
-            {questionError}
+            {questionError && <ErrorMessage>{questionError}</ErrorMessage>}
           </StyledLabel>
           <StyledLabel>
             Selected text
@@ -70,13 +70,32 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
             />
           </StyledLabel>
           {authorized && <StyledButton type="submit">Ask ChatGPT</StyledButton>}
+          {/*{<StyledButton type="submit">Ask ChatGPT</StyledButton>}*/}
         </form>
-        {<LoginChatGpt onStatusChange={onAuthStatusChange} />}
+        {!authorized && (
+          <StyledAuth>
+            <LoginChatGpt onStatusChange={onAuthStatusChange} />
+          </StyledAuth>
+        )}
         {requestString && <ChatGPTQuery question={requestString} />}
       </StyledModal>
     </StyledModalContainer>
   );
 };
+
+const StyledAuth = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  background-color: ${({ theme }) => theme.colors.inputsBackground};
+  color: ${({ theme }) => theme.colors.pink};
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 3px;
+
+  a {
+    color: ${({ theme }) => theme.colors.link};
+    text-decoration: underline;
+  }
+`;
 
 const StyledModalContainer = styled.div`
   position: fixed;
@@ -104,7 +123,7 @@ export const StyledModal = styled.div`
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  max-height: 800px;
+  max-height: 80%;
 `;
 
 const StyledHeader = styled.div`
@@ -127,6 +146,10 @@ const StyledLabel = styled.label`
   font-size: 16px;
   row-gap: 10px;
   border-radius: 3px;
+`;
+
+const ErrorMessage = styled.label`
+  color: red;
 `;
 
 const inputStyles = css`
