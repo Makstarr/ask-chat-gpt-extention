@@ -2,9 +2,10 @@ import { createRoot } from 'react-dom/client';
 
 import { ThemeProvider } from 'styled-components';
 
-import { UserSettings } from 'src/options/user-settings';
-import { getUserTheme } from 'src/shared/getUserTheme';
+import { getUserTheme } from 'src/helpers/getUserTheme';
 import GlobalStyle from 'src/theme/global-styles';
+
+import { Popup } from './popup';
 
 (async () => {
   const appContainer = document.createElement('div');
@@ -12,12 +13,15 @@ import GlobalStyle from 'src/theme/global-styles';
   if (!appContainer) {
     throw new Error('Can not find AppContainer');
   }
+  document.body.id = 'ask-chatgpt-popup-container';
+
   const root = createRoot(appContainer);
   const theme = await getUserTheme();
+
   root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <UserSettings />
+      <Popup />
     </ThemeProvider>
   );
 })();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { AskChatGPTButton } from 'src/contentScript/components/ask-chatgpt-button';
-import { AskChatGPTModal } from 'src/contentScript/components/ask-chatgpt-modal';
+import { AskChatGPTButton } from 'src/components/ask-chatgpt-button';
+import { AskChatGPTModal } from 'src/components/ask-chatgpt-modal';
 
 export default () => {
   const [selectedText, setSelectedText] = useState('');

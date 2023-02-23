@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 
 import rehypeHighlight from 'rehype-highlight';
 
-import { Answer } from 'src/shared/types';
+import { Answer } from 'src/helpers/types';
 
 export type QueryStatus = 'success' | 'error' | undefined;
 
@@ -16,7 +16,6 @@ export const REQUEST_MESSAGE_TYPE = 'CHAT GPT REQUEST MESSAGE';
 function ChatGptQuery(props: Props) {
   const [answer, setAnswer] = useState<Answer | null>(null);
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const port = chrome.runtime.connect();
@@ -30,7 +29,6 @@ function ChatGptQuery(props: Props) {
       } else if (msg.error) {
         setError(msg.error);
       }
-      setIsLoading(false);
     };
 
     port.onMessage.addListener(listener);

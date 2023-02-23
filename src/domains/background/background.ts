@@ -1,8 +1,8 @@
 import {
   ChatGPTProvider,
   getChatGPTAccessToken, // sendMessageFeedback,
-} from '../shared/chatgpt';
-import { Provider } from '../shared/types';
+} from '../../helpers/chatgpt';
+import { Provider } from '../../helpers/types';
 
 chrome.contextMenus.create({
   id: 'web-extension-chatgpt-context-menu',

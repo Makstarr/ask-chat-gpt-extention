@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { LoginChatGpt } from '../contentScript/components/login-chat-gpt';
+import { LoginChatGpt } from '../../components/login-chat-gpt';
 
 export const Popup = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
