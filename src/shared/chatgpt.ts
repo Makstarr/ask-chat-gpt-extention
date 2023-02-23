@@ -51,17 +51,18 @@ export async function getChatGPTAccessToken() {
   // }
 
 
-  const currentToken = await chrome.storage.sync.get(KEY_ACCESS_TOKEN);
+  // const currentToken = await chrome.storage.sync.get(KEY_ACCESS_TOKEN);
   // if (currentToken) {
   //   return currentToken;
   // }
 
-  console.log({ currentToken });
+  // console.log({ currentToken });
   console.log('getChatGPTAccessToken');
   const resp = await fetch('https://chat.openai.com/api/auth/session');
   console.log(resp);
 
   if (resp.status === 403) {
+    console.log(resp)
     throw new Error('CLOUDFLARE');
   }
 

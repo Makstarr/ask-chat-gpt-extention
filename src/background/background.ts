@@ -1,9 +1,8 @@
-//  TODO: refactor the whole file
-
-import { ChatGPTProvider, getChatGPTAccessToken // sendMessageFeedback,
+import {
+  ChatGPTProvider,
+  getChatGPTAccessToken, // sendMessageFeedback,
 } from '../shared/chatgpt';
 import { Provider } from '../shared/types';
-
 
 chrome.contextMenus.create({
   id: 'web-extension-chatgpt-context-menu',
@@ -46,34 +45,18 @@ async function generateAnswers(
 }
 
 chrome.runtime.onConnect.addListener((port) => {
-  console.log('connect');
   port.onMessage.addListener(async (msg) => {
     console.debug('received msg', msg);
-
     try {
       const token = await getChatGPTAccessToken();
-      console.log({ msg });
-      console.log(token);
       if (msg.question) {
         await generateAnswers(port, token, msg.question);
       } else {
-        port.postMessage({ type: 'AUTHORIZED' });
+        port.postMessage({ type: msg.type, success: true });
       }
-      console.log(msg.question);
     } catch (err: any) {
       console.error(err);
-      port.postMessage({ error: err.message });
+      port.postMessage({ type: msg.type, status: err.message });
     }
   });
 });
-
-// chrome.runtime.onMessage.addListener(async (message) => {
-//   if (message.type === 'FEEDBACK') {
-//     const token = await getChatGPTAccessToken();
-//     await sendMessageFeedback(token, message.data);
-//   } else if (message.type === 'OPEN_OPTIONS_PAGE') {
-//     await chrome.runtime.openOptionsPage();
-//   } else if (message.type === 'GET_ACCESS_TOKEN') {
-//     return getChatGPTAccessToken();
-//   }
-// });

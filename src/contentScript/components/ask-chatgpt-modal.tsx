@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import styled, { css } from 'styled-components';
 
-import ChatGPTQuery, { QueryStatus } from './ChatGPTQuery';
+import ChatGPTQuery, { QueryStatus } from './chat-gpt-query';
 import { getRandomQuestionExample } from './get-random-question-example';
 import { Icon } from './icon';
-
+import { AUTH_MESSAGE_SUCCESS, LoginChatGpt } from './login-chat-gpt';
 
 // TODO: Change status logic
 // TODO: Answer render
@@ -21,7 +21,7 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
   const [question, setQuestion] = useState('');
   const [questionError, setQuestionError] = useState('');
   const [requestString, setRequestString] = useState('');
-  const [status, setStatus] = useState<QueryStatus>();
+  const [authorized, setAuthorized] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,9 +33,10 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
     setRequestString(editedSelectedText + ' ' + question);
   }
 
-  const onStatusChange = (status: QueryStatus) => {
-    setStatus(status);
+  const onAuthStatusChange = (isAuthotized: boolean) => {
+    setAuthorized(isAuthotized);
   };
+
   return (
     <StyledModalContainer className="modal-background" onClick={onClose}>
       <StyledModal
@@ -68,14 +69,10 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
               }}
             />
           </StyledLabel>
-          {status === 'success' && (
-            <StyledButton type="submit">Ask ChatGPT</StyledButton>
-          )}
+          {authorized && <StyledButton type="submit">Ask ChatGPT</StyledButton>}
         </form>
-        <ChatGPTQuery
-          question={requestString}
-          onStatusChange={onStatusChange}
-        />
+        {<LoginChatGpt onStatusChange={onAuthStatusChange} />}
+        {requestString && <ChatGPTQuery question={requestString} />}
       </StyledModal>
     </StyledModalContainer>
   );

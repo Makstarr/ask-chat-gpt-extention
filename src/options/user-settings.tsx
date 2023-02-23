@@ -1,11 +1,8 @@
-// TODO: Change to options page
-
-
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { getUserConfig, Theme, updateUserConfig } from './userConfig';
+import { getUserConfig, Theme, updateUserConfig } from '../shared/userConfig';
 
 export function UserSettings() {
   const [theme, setTheme] = useState<string>('');

@@ -3,8 +3,11 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import { getUserTheme } from 'src/shared/getUserTheme';
-import { UserSettings } from 'src/shared/userSettings';
+import { UserSettings } from 'src/options/user-settings';
 import GlobalStyle from 'src/theme/global-styles';
+
+import { LoginChatGpt } from '../contentScript/components/login-chat-gpt';
+import { Popup } from './popup';
 
 (async () => {
   const appContainer = document.createElement('div');
@@ -17,12 +20,10 @@ import GlobalStyle from 'src/theme/global-styles';
   const root = createRoot(appContainer);
   const theme = await getUserTheme();
 
-  // TODO: Add login logic here
-
   root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <UserSettings />
+      <Popup />
     </ThemeProvider>
   );
 })();
