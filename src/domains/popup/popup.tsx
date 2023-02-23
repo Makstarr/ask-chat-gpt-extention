@@ -9,10 +9,6 @@ export const Popup = () => {
     setIsAuthorized(isAuthorized);
   };
 
-  if (isAuthorized) {
-    return <p>Successfully authorized, you can use the app </p>;
-  }
-
   const openOptionsPage = () => {
     chrome.runtime.sendMessage({ type: 'OPEN_OPTIONS_PAGE' });
   };
@@ -20,7 +16,11 @@ export const Popup = () => {
   return (
     <div>
       <button onClick={openOptionsPage}>Settings</button>
-      <LoginChatGpt onStatusChange={onAuthStatusChange} />
+      {isAuthorized ? (
+        <p>Successfully authorized, you can use the app </p>
+      ) : (
+        <LoginChatGpt onStatusChange={onAuthStatusChange} />
+      )}
     </div>
   );
 };
