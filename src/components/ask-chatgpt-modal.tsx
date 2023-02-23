@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styled, { css } from 'styled-components';
 
@@ -18,7 +18,19 @@ export const AskChatGPTModal = ({ onClose, selectedText }: TProps) => {
   const [questionError, setQuestionError] = useState('');
   const [requestString, setRequestString] = useState('');
   const [authorized, setAuthorized] = useState(false);
-  const exampleQuestion = getRandomQuestionExample();
+  const [exampleQuestion, setExampleQuestion] = useState(
+    getRandomQuestionExample()
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log(getRandomQuestionExample());
+      setExampleQuestion(getRandomQuestionExample());
+    }, 2000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
