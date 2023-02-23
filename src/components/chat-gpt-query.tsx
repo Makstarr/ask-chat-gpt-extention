@@ -72,22 +72,25 @@ const StyledIcon = styled.div`
 `;
 
 const StyledAnswer = styled.div`
-  background-color: ${({ theme }) => theme.colors.inputsBackground};
-  color: ${({ theme }) => theme.colors.text};
+  background-color: ${({theme}) => theme.colors.inputsBackground};
+  color: ${({theme}) => theme.colors.text};
   margin-left: 35px;
   margin-top: 35px;
-  padding: 10px;
+  padding: 20px;
   position: relative;
   border-radius: 10px;
   text-align: left;
+
+  & > p {
+    margin: 0;
+  }
 
   ::before {
     content: '';
     height: 0;
     border-style: solid;
     border-width: 0 10px 30px 10px;
-    border-color: transparent transparent
-      ${({ theme }) => theme.colors.inputsBackground} transparent;
+    border-color: transparent transparent ${({theme}) => theme.colors.inputsBackground} transparent;
     transform: rotate(-45deg);
     position: absolute;
     top: -15px;
