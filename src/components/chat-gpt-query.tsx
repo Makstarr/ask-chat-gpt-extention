@@ -93,7 +93,7 @@ const StyledAnswer = styled.div`
     position: absolute;
     top: -15px;
     left: -10px;
-    width: 20px;
+    width: 0;
   }
 }
 
