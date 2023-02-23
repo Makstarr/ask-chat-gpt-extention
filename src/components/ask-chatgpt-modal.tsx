@@ -191,7 +191,8 @@ const StyledInput = styled.input<{ error: boolean }>`
 
 const StyledTextArea = styled.textarea`
   ${inputStyles};
-  min-height: 150px;
+  height: 100px;
+  resize: vertical;
 `;
 
 const StyledButton = styled.button`
