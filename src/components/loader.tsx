@@ -22,5 +22,6 @@ const pulse = keyframes`
 
 // Apply the pulse animation to the paragraph
 const AnimatedParagraph = styled.p`
+  padding: 0 10px;
   animation: ${pulse} 1s ease-in-out infinite;
 `;

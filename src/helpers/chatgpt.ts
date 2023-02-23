@@ -1,6 +1,3 @@
-// TODO: Refactor the whole file
-//
-// import ExpiryMap from 'expiry-map';
 import { v4 as uuidv4 } from 'uuid';
 
 import { fetchSSE } from './fetch-sse';
@@ -40,21 +37,15 @@ export async function setConversationProperty(
 }
 
 const KEY_ACCESS_TOKEN = 'accessToken';
-//
-// const cache = new ExpiryMap(10 * 1000);
 
 export async function getChatGPTAccessToken() {
-  // TODO: Try to restore cache token behaviour (crashes background.js)
+  const cacheToken = (await chrome.storage.sync.get([KEY_ACCESS_TOKEN]))[
+    KEY_ACCESS_TOKEN
+  ];
 
-  // if (cache.get(KEY_ACCESS_TOKEN)) {
-  //   return cache.get(KEY_ACCESS_TOKEN);
-  // }
-
-
-  // const currentToken = await chrome.storage.sync.get(KEY_ACCESS_TOKEN);
-  // if (currentToken) {
-  //   return currentToken;
-  // }
+  if (Date.now() - cacheToken.time <= 10000) {
+    return cacheToken.token;
+  }
 
   const resp = await fetch('https://chat.openai.com/api/auth/session');
 
@@ -67,11 +58,17 @@ export async function getChatGPTAccessToken() {
   if (!data.accessToken) {
     throw new Error('UNAUTHORIZED');
   }
-  await chrome.storage.sync.set({ [KEY_ACCESS_TOKEN]: data.accessToken });
+
+  await chrome.storage.sync.set({
+    [KEY_ACCESS_TOKEN]: {
+      time: Date.now(),
+      token: data.accessToken,
+    },
+  });
+
   return data.accessToken;
 }
 
-//
 export class ChatGPTProvider implements Provider {
   constructor(private token: string) {
     this.token = token;
