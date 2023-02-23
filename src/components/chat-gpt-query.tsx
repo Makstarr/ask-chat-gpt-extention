@@ -9,8 +9,6 @@ import { Answer } from 'src/helpers/types';
 import { Icon } from './icon';
 import { Loader } from './loader';
 
-export type QueryStatus = 'success' | 'error' | undefined;
-
 interface Props {
   question?: string;
 }
@@ -51,7 +49,7 @@ function ChatGptQuery(props: Props) {
       {props.question && error ? (
         <p>
           Failed to load response from ChatGPT:
-          <span className="break-all block">{error}</span>
+          <span>{error}</span>
         </p>
       ) : null}
 
